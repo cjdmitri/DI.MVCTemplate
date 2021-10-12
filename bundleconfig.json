@@ -1,0 +1,26 @@
+[
+  {
+    "outputFileName": "wwwroot/css/template.min.css",
+    "inputFiles": [
+      "wwwroot/css/bootstrap.css",
+      "wwwroot/css/dashboard.css",
+      "wwwroot/css/sidebars.css",
+      "wwwroot/css/bootstrap-icons.css",
+      "wwwroot/css/site.css"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/template.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  }
+]

@@ -1,0 +1,78 @@
+﻿@{
+    if (ViewBag.Title == null)
+        ViewBag.Title = "DI.MVCTemplate";
+    if (ViewBag.Description == null)
+        ViewBag.Description = "ASP .Net Core MVC template";
+    //if (ViewBag.UrlImage == null)
+    //    ViewBag.UrlImage = Url.Content("~/img/general.jpg");
+    if (ViewBag.Keywords == null)
+        ViewBag.Keywords = "ASP .Net Core MVC template, bootstrap 5 template, asp .net core";
+    if (ViewBag.Canonical == null)
+        ViewBag.Canonical = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}{Context.Request.QueryString}".ToLower();
+    if (ViewBag.H1 == null)
+        ViewBag.H1 = ViewBag.Title;
+    string siteDomain = $"{Context.Request.Host}";
+}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - DI.MVCTemplate</title>
+    <link rel="image_src" href="@ViewBag.UrlImage">
+    <meta name="description" content="@ViewBag.Description">
+    <meta name="keywords" content="@ViewBag.Keywords">
+    @*Open Graph*@
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="@ViewBag.Title">
+    <meta property="og:description" content="@ViewBag.Description">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content=@siteDomain>
+    <meta property="og:url" content="@ViewBag.Canonical">
+    <meta property="og:image" content="@ViewBag.UrlImage">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="@ViewBag.UrlImage">
+    <meta name="twitter:description" content="@ViewBag.Description">
+    <meta name="twitter:title" content="@ViewBag.Title">
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/dashboard.css" />
+        <link rel="stylesheet" href="~/css/sidebars.css" />
+        <link rel="stylesheet" href="~/css/bootstrap-icons.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+
+    </environment>
+    <environment exclude="Development">
+        <cache expires-after="@TimeSpan.FromDays(10)">
+            <link rel="stylesheet" href="~/css/template.min.css" asp-append-version="true" />
+        </cache>
+    </environment>
+</head>
+<body>
+    @{ await Html.RenderPartialAsync("_navbar");}
+    <div class="container-fluid">
+        <div class="row">
+            @{ await Html.RenderPartialAsync("_sidebar");}
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                @{ await Html.RenderPartialAsync("_header");}
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+
+    <environment include="Development">
+        <script async defer src="~/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+        <script async defer src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <cache expires-after="@TimeSpan.FromDays(365)">
+            <script async defer src="~/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+            <script async defer src="~/js/template.min.js" asp-append-version="true"></script>
+        </cache>
+    </environment>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

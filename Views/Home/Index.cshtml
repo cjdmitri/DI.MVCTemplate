@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    ViewBag.Description = "Шаблон проекта ASP .Net Core MVC. Цель данного проекта – сокращение времени разработки Веб-проектов, за счет внедрения часто используемого функционала (SEO-оптимизация, сокращение времени загрузки, сжатие и кеширование ответов, исключение дублей и др.)";
+    ViewBag.Canonical = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}".ToLower();
+    ViewBag.H1 = "ASP .Net Core MVC template";
+    ViewBag.Keywords = "ASP .Net Core MVC template, bootstrap 5 template, asp .net core";
+    ViewBag.UrlImage = null;
+}
+
+<div class="row">
+    <div class="col-12">
+        <h4 class="fw-bold">Версия: 0.1.0 (2021.10)</h4>
+        <p class="small text-muted">Что нового, изменения</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="card shadow">
+            <div class="card-body">
+                @*<h5 class="fw-bold">Frontend</h5>*@
+                <ul class="list-group">
+                    <li class="list-group-item"><i class="bi bi-check text-success"></i>Поддержка Bootstrap 5</li>
+                    <li class="list-group-item"><i class="bi bi-check text-success"></i>Поддержка Bootstrap-icons</li>
+                    <li class="list-group-item"><i class="bi bi-check text-success"></i>Кэширование стилей и скриптов</li>
+                    <li class="list-group-item"><i class="bi bi-check text-success"></i>Кэширование ответа</li>
+                    <li class="list-group-item"><i class="bi bi-check text-success"></i>Сборка и минификация стилей (Bundler & Minifier)</li>
+                    <li class="list-group-item"><i class="bi bi-check text-success"></i>Сборка и минификация скриптов (Bundler & Minifier)</li>
+                    <li class="list-group-item"><i class="bi bi-check text-success"></i>Указание канонической ссылки</li>
+                    <li class="list-group-item"><i class="bi bi-check text-success"></i>GZip-сжатие ответа</li>
+                    <li class="list-group-item"><i class="bi bi-check text-success"></i>301 редирект, при наличие заглавных символов в URL, на URL to LowerCase</li>
+                    <li class="list-group-item"><i class="bi bi-check text-success"></i>Редирект, при наличии нескольких «/» в конце URL</li>
+                    <li class="list-group-item"><i class="bi bi-check text-success"></i>Корректная обработка ошибок HTTP</li>
+                    <li class="list-group-item"><i class="bi bi-check text-success"></i>Страница 404</li>
+                    <li class="list-group-item"><i class="bi bi-check text-success"></i>Наличие разметки Open Graph</li>
+                    <li class="list-group-item"><i class="bi bi-check text-success"></i>Автоматическая замена href в цикличных ссылках (страницы ссылающиеся сами на себя)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

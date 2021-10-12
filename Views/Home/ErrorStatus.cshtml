@@ -1,0 +1,36 @@
+﻿@model int
+
+@{
+    switch (Model)
+    {
+        case 400:
+            ViewBag.Title = "Произошла ошибка!";
+            ViewBag.Description = "В процессе обработки запроса произошла ошибка. Попробуйте позже.";
+            break;
+        case 401:
+            ViewBag.Title = "Доступ запрещен!";
+            ViewBag.Description = "Извините, но страница требует аутентификации.";
+            break;
+        case 403:
+            ViewBag.Title = "Доступ запрещен";
+            ViewBag.Description = "Извините, но у вас нет прав на доступ к этой странице.";
+            break;
+        case 404:
+            ViewBag.Title = "Страница не найдена";
+            ViewBag.Description = "Извините, но страница, которую вы искали, не найдена.";
+            break;
+        case 500:
+        default:
+            ViewBag.Title = "Произошла ошибка";
+            ViewBag.Description = "В процессе обработки запроса произошла ошибка.";
+            break;
+    }
+ViewBag.HeaderHide=true;
+}
+<div class="alert alert-danger mg" role="alert">
+    <h1>@ViewBag.Title</h1>
+    <p>
+        @ViewBag.Description
+    </p>
+    <a asp-controller="Home" asp-action="Index">На главную</a>
+</div>
