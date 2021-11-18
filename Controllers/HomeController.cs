@@ -1,4 +1,7 @@
-﻿using DI.MVCTemplate.Models;
+﻿using DI.MVCTemplate.Data;
+using DI.MVCTemplate.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,17 +12,18 @@ using System.Threading.Tasks;
 
 namespace DI.MVCTemplate.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : _MyTemplateController
     {
-        private readonly ILogger<HomeController> _logger;
+        //private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<AppUser> signInManager, IWebHostEnvironment _env, ApplicationDbContext _db) : base(userManager, roleManager, signInManager, _env, _db)
         {
-            _logger = logger;
+
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            await RoleInitializer.InitializeAsync(_userManager, _roleManager);
             return View();
         }
 

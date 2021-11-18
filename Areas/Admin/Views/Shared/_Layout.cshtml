@@ -38,6 +38,8 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/dashboard.css" />
+        <link rel="stylesheet" href="~/css/sidebars.css" />
         <link rel="stylesheet" href="~/css/bootstrap-icons.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
@@ -49,11 +51,16 @@
 </head>
 <body>
     @{ await Html.RenderPartialAsync("_navbar");}
-    <main role="main" class="container">
-        @{ await Html.RenderPartialAsync("_header");}
-        @RenderBody()
-    </main>
-    @{ await Html.RenderPartialAsync("_footer");}
+    <div class="container-fluid">
+        <div class="row">
+            @{ await Html.RenderPartialAsync("_sidebar");}
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                @{ await Html.RenderPartialAsync("_header");}
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
 
     <environment include="Development">
         <script async defer src="~/js/bootstrap.bundle.min.js" asp-append-version="true"></script>

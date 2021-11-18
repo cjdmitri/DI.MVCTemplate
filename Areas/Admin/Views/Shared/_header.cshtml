@@ -1,0 +1,10 @@
+﻿@{ 
+    if (ViewBag.HeaderHide == null || ViewBag.HeaderHide != true)
+    {
+        <div class="pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">@ViewBag.H1</h1>
+            <p class="text-muted small">@ViewBag.Description</p>
+        </div>
+
+    }
+}

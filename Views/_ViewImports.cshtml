@@ -1,4 +1,9 @@
 ﻿@using DI.MVCTemplate
 @using DI.MVCTemplate.Models
+@using DI.MVCTemplate.Data
+@using Microsoft.AspNetCore.Identity
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper *, DI.MVCTemplate
+@inject ApplicationDbContext db
+@inject UserManager<AppUser> userManager
+@inject RoleManager<IdentityRole> roleManager

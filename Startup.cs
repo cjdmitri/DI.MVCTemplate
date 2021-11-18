@@ -1,4 +1,5 @@
 using DI.MVCTemplate.Data;
+using DI.MVCTemplate.Models;
 using DI.MVCTemplate.Rules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -40,6 +41,33 @@ namespace DI.MVCTemplate
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
+            //services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //  .AddRoles<IdentityRole>()
+            //  .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            //добавляются специфичные для Identity сервисы
+            services.AddDefaultIdentity<AppUser>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = false; //Необходимо указать число от 0-9 и пароль.
+                options.Password.RequiredLength = 4; //Минимальная длина пароля.
+                options.Password.RequiredUniqueChars = 2; //Требует количества уникальных символов в пароле.
+                options.Password.RequireLowercase = false; //Требуется нижний регистр символов в пароле.
+                options.Password.RequireNonAlphanumeric = false; //Требуется не буквенно-цифровых символов в пароле.
+                options.Password.RequireUppercase = false; //Требуется символ верхнего регистра в пароле.
+
+                // User settings
+                options.User.RequireUniqueEmail = true;  //Требуется иметь уникальный адрес электронной почты пользователя.
+                options.SignIn.RequireConfirmedAccount = false; //Истина, если у пользователя должна быть подтвержденная учетная запись, прежде чем он сможет войти, в противном случае - ложь.
+
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+            })
+                .AddSignInManager()
+                .AddDefaultTokenProviders()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
             // добавляем сервис компрессии
             // Configure Compression level
             services.Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Fastest);
@@ -66,8 +94,6 @@ namespace DI.MVCTemplate
             //Нижний регистр для url-адресов
             services.AddRouting(options => options.LowercaseUrls = true);
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
 
             services.AddResponseCaching();
@@ -83,7 +109,7 @@ namespace DI.MVCTemplate
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                //app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
